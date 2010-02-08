@@ -10,8 +10,6 @@ auto_set_homepage;
 auto_set_bugtracker;
 auto_set_repository;
 
-requires 'Class::Accessor::Complex';
-
 test_requires 'Test::More' => '0.70';
 extra_tests;
 
