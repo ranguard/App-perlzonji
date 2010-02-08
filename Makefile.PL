@@ -33,6 +33,7 @@ author_requires 'Test::HasVersion';
 author_requires 'Test::CheckChanges';
 author_requires 'Test::DistManifest';
 
+install_script glob('bin/*');
 auto_install;
 auto_include;
 WriteAll;
