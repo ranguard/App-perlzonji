@@ -1,8 +1,15 @@
 #!/usr/bin/env perl
 use warnings;
 use strict;
+use Pod::Usage::CommandLine qw(GetOptions pod2usage);
 our $VERSION = '0.02';
-my $word = shift;
+
+my %opt = (
+    'perldoc-command' => 'perldoc',
+);
+GetOptions(\%opt, 'perldoc-command:s') or pod2usage(2);
+
+my $word = shift @ARGV;
 
 # Specify like this because it's easier. We compute the reverse later (i.e.,
 # it should be easier on the hacker than on the computer).
@@ -84,14 +91,14 @@ my %found_in = (
 );
 
 while (my ($file, $words) = each %found_in) {
-    $_ eq $word && run(perldoc => $file) for @$words;
+    $_ eq $word && run($opt{'perldoc-command'} => $file) for @$words;
 }
 
 # Is it a label (ends with ':')? Do this after %found_in, because there are
 # special labels such as 'SKIP:' and 'TODO:' that map to Test::More
-$word =~ /^\w+:$/       && run(perldoc => 'perlsyn');
-$word =~ /^UNIVERSAL::/ && run(perldoc => 'perlobj');
-$word =~ /^CORE::/      && run(perldoc => 'perlsub');
+$word =~ /^\w+:$/       && run($opt{'perldoc-command'} => 'perlsyn');
+$word =~ /^UNIVERSAL::/ && run($opt{'perldoc-command'} => 'perlobj');
+$word =~ /^CORE::/      && run($opt{'perldoc-command'} => 'perlsub');
 
 # try it as a module
 try_module($word);
@@ -101,13 +108,13 @@ try_module($word);
 $word =~ s/::(\w+)$// && try_module($word);
 
 # otherwise, assume it's a function
-run(qw(perldoc -f), $word);
+run($opt{'perldoc-command'}, qw(-f), $word);
 
 # if we can require() it, we run perldoc for the module
 sub try_module {
     my $module = shift;
     eval "use $module;";
-    !$@ && run(perldoc => $module);
+    !$@ && run($opt{'perldoc-command'} => $module);
 }
 
 sub run {
@@ -138,6 +145,27 @@ C<perlzonji> is like C<perldoc> except it knows about more things. Try these:
     perlzonji __WARN__
     perlzonji __PACKAGE__
     perlzonji head4
+
+=head1 OPTIONS
+
+Options can be shortened according to L<Getopt::Long/"Case and abbreviations">.
+
+=over
+
+=item C<--perldoc-command>
+
+Specifies the POD formatter/pager to delegate to. Default is C<perldoc>.
+C<annopod> from L<AnnoCPAN::Perldoc> is a better alternative.
+
+=item C<--help>
+
+Prints a brief help message and exits.
+
+=item C<--man>
+
+Prints the manual page and exits.
+
+=back
 
 =head1 BUGS AND LIMITATIONS
 
