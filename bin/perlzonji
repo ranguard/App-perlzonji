@@ -7,7 +7,7 @@ our $VERSION = '0.02';
 my %opt = (
     'perldoc-command' => 'perldoc',
 );
-GetOptions(\%opt, 'perldoc-command:s') or pod2usage(2);
+GetOptions(\%opt, 'perldoc-command:s', 'debug') or pod2usage(2);
 
 my $word = shift @ARGV;
 
@@ -118,7 +118,7 @@ sub try_module {
 }
 
 sub run {
-    print "@_\n";
+    print "@_\n" if $opt{debug};
     exec @_;
 }
 __END__
@@ -158,6 +158,10 @@ Options can be shortened according to L<Getopt::Long/"Case and abbreviations">.
 
 Specifies the POD formatter/pager to delegate to. Default is C<perldoc>.
 C<annopod> from L<AnnoCPAN::Perldoc> is a better alternative.
+
+=item C<--debug>
+
+Prints the whole command before executing it.
 
 =item C<--help>
 
