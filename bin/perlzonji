@@ -146,6 +146,8 @@ C<perlzonji> is like C<perldoc> except it knows about more things. Try these:
     perlzonji __PACKAGE__
     perlzonji head4
 
+For efficiency, C<alias pod=perlzonji>.
+
 =head1 OPTIONS
 
 Options can be shortened according to L<Getopt::Long/"Case and abbreviations">.
