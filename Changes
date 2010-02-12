@@ -1,5 +1,8 @@
 Revision history for Perl extension App-perlzonji
 
+0.03  Fri 2010.02.12 11:36:44 CET (Marcel Gruenauer <marcel@cpan.org>)
+     - added --perldoc-command, --debug and other common options (daxim)
+
 0.02  Mon 2010.02.08 14:54:26 CET (Marcel Gruenauer <marcel@cpan.org>)
      - added docs to bin/perlzonji
 

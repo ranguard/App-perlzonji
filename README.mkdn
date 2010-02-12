@@ -37,6 +37,8 @@ and github infrastructure.
 
 Marcel Gr&uuml;nauer, `<marcel@cpan.org>`
 
+Lars Dieckow, `<daxim@cpan.org>`
+
 # COPYRIGHT AND LICENSE
 
 Copyright 2010 by Marcel Gr&uuml;nauer

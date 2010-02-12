@@ -2,9 +2,11 @@ package App::perlzonji;
 use 5.008;
 use strict;
 use warnings;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 1;
 __END__
+
+=for stopwords Dieckow
 
 =head1 NAME
 
@@ -44,6 +46,8 @@ and github infrastructure.
 =head1 AUTHORS
 
 Marcel GrE<uuml>nauer, C<< <marcel@cpan.org> >>
+
+Lars Dieckow, C<< <daxim@cpan.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
