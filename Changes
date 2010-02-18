@@ -1,5 +1,9 @@
 Revision history for Perl extension App-perlzonji
 
+0.04  Thu 2010.02.18 20:59:44 CET (Marcel Gruenauer <marcel@cpan.org>)
+     - added environment variables (perlrun) and PerlIO layer names
+     - explained the word "zonji"
+
 0.03  Fri 2010.02.12 11:36:44 CET (Marcel Gruenauer <marcel@cpan.org>)
      - added --perldoc-command, --debug and other common options (daxim)
 
