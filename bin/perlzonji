@@ -3,12 +3,8 @@ use warnings;
 use strict;
 use Pod::Usage::CommandLine qw(GetOptions pod2usage);
 our $VERSION = '0.03';
-
-my %opt = (
-    'perldoc-command' => 'perldoc',
-);
+my %opt = ('perldoc-command' => 'perldoc',);
 GetOptions(\%opt, 'perldoc-command:s', 'debug') or pod2usage(2);
-
 my $word = shift @ARGV;
 
 # Specify like this because it's easier. We compute the reverse later (i.e.,
@@ -45,6 +41,13 @@ my %found_in = (
           LAST_REGEXP_CODE_RESULT EXCEPTIONS_BEING_CAUGHT BASETIME TAINT UNICODE
           PERL_VERSION WARNING WARNING_BITS EXECUTABLE_NAME ARGVOUT INC SIG
           __DIE__ __WARN__)
+    ],
+    perlrun => [
+        qw(HOME LOGDIR PATH PERL5LIB PERL5OPT PERLIO PERLIO_DEBUG PERLLIB
+          PERL5DB PERL5DB_THREADED PERL5SHELL PERL_ALLOW_NON_IFS_LSP
+          PERL_DEBUG_MSTATS PERL_DESTRUCT_LEVEL PERL_DL_NONLAZY PERL_ENCODING
+          PERL_HASH_SEED PERL_HASH_SEED_DEBUG PERL_ROOT PERL_SIGNALS
+          PERL_UNICODE)
     ],
     perlpod => [
         qw(head1 head2 head3 head4 over item back cut pod begin
@@ -88,6 +91,9 @@ my %found_in = (
           mkdtemp mktemp unlink0 safe_level)
     ],
     'File::Copy' => [qw(copy move cp mv rmscopy)],
+    'PerlIO' => [
+        qw(:bytes :crlf :mmap :perlio :pop :raw :stdio :unix :utf8 :win32)
+    ],
 );
 
 while (my ($file, $words) = each %found_in) {
