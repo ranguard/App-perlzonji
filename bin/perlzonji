@@ -2,7 +2,7 @@
 use warnings;
 use strict;
 use Pod::Usage::CommandLine qw(GetOptions pod2usage);
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 my %opt = ('perldoc-command' => 'perldoc',);
 GetOptions(\%opt, 'perldoc-command:s', 'debug') or pod2usage(2);
 my $word = shift @ARGV;
@@ -129,7 +129,7 @@ sub run {
 }
 __END__
 
-=for stopwords Dieckow
+=for stopwords Dieckow gozonji desu ka
 
 =head1 NAME
 
@@ -150,11 +150,17 @@ C<perlzonji> is like C<perldoc> except it knows about more things. Try these:
     perlzonji AUTOLOAD
     perlzonji TIEARRAY
     perlzonji INPUT_RECORD_SEPARATOR
+    perlzonji PERL5OPT
+    perlzonji :mmap
     perlzonji __WARN__
     perlzonji __PACKAGE__
     perlzonji head4
 
 For efficiency, C<alias pod=perlzonji>.
+
+The word C<zonji> means "knowledge of" in Japanese. Another example is the
+question "gozonji desu ka", meaning "Do you know?" - "go" is a prefix added
+for politeness.
 
 =head1 OPTIONS
 
