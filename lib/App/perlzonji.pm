@@ -195,3 +195,18 @@ Prints the manual page and exits.
 
 =back
 
+=function run
+
+The main function, which is called by the C<perlzonji> program.
+
+=function try_module
+
+Takes as argument the name of a module, tries to load that module and executes
+the formatter, giving that module as an argument. If loading the module fails,
+this subroutine does nothing.
+
+=function execute
+
+Executes the given command using C<exec()>. In debug mode, it also prints the
+command before executing it.
+

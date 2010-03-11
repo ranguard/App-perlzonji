@@ -3,6 +3,7 @@ Revision history for Perl extension {{$dist->name}}
 {{$NEXT}}
     - converted the distribution to Dist::Zilla-style
     - moved the code to App::perlzonji; bin/perlzonji is just a thin wrapper
+    - documented the subroutines
 
 0.04  Thu 2010.02.18 20:59:44 CET (Marcel Gruenauer <marcel@cpan.org>)
      - added environment variables (perlrun) and PerlIO layer names
