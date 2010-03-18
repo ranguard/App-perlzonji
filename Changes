@@ -1,6 +1,11 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - removed weaver.ini since that's handled in Dist::Zilla's [@MARCEL] now
+    - exposed %found_in as a package global
+    - removed Class::MethodMaker definitions
+    - added Moose definitions
+    - removed duplicates
 
 1.100710  2010-03-12 00:48:03 Europe/Vienna
     - converted the distribution to Dist::Zilla-style
