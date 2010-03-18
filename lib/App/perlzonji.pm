@@ -27,20 +27,26 @@ our %found_in = (
           CLOSE)
     ],
     perlvar => [
-        qw(_ a b 0 1 2 3 4 5 6 7 8 9 ARG STDIN STDOUT STDERR ARGV
-          ENV PREMATCH MATCH POSTMATCH LAST_PAREN_MATCH LAST_MATCH_END
-          MULTILINE_MATCHING INPUT_LINE_NUMBER NR INPUT_RECORD_SEPARATOR RS
-          OUTPUT_AUTOFLUSH OUTPUT_FIELD_SEPARATOR OFS OUTPUT_RECORD_SEPARATOR
-          ORS LIST_SEPARATOR SUBSCRIPT_SEPARATOR SUBSEP OFMT FORMAT_PAGE_NUMBER
-          FORMAT_LINES_PER_PAGE FORMAT_LINES_LEFT LAST_MATCH_START FORMAT_NAME
-          FORMAT_TOP_NAME FORMAT_LINE_BREAK_CHARACTERS FORMAT_FORMFEED
-          ACCUMULATOR CHILD_ERROR ENCODING OS_ERROR ERRNO EXTENDED_OS_ERROR
-          EVAL_ERROR PROCESS_ID PID REAL_USER_ID UID EFFECTIVE_USER_ID EUID
-          REAL_GROUP_ID GID EFFECTIVE_GROUP_ID EGID PROGRAM_NAME COMPILING
-          DEBUGGING SYSTEM_FD_MAX INPLACE_EDIT OSNAME OPEN PERLDB
-          LAST_REGEXP_CODE_RESULT EXCEPTIONS_BEING_CAUGHT BASETIME TAINT UNICODE
-          PERL_VERSION WARNING WARNING_BITS EXECUTABLE_NAME ARGVOUT INC SIG
-          __DIE__ __WARN__)
+        qw(_ a b 0 1 2 3 4 5 6 7 8 9 ARG STDIN STDOUT STDERR ARGV ENV PREMATCH
+          MATCH POSTMATCH LAST_PAREN_MATCH LAST_SUBMATCH_RESULT
+          LAST_MATCH_END MULTILINE_MATCHING INPUT_LINE_NUMBER NR
+          INPUT_RECORD_SEPARATOR RS OUTPUT_AUTOFLUSH OUTPUT_FIELD_SEPARATOR
+          OFS OUTPUT_RECORD_SEPARATOR ORS LIST_SEPARATOR SUBSCRIPT_SEPARATOR
+          SUBSEP FORMAT_PAGE_NUMBER FORMAT_LINES_PER_PAGE FORMAT_LINES_LEFT
+          LAST_MATCH_START FORMAT_NAME FORMAT_TOP_NAME
+          FORMAT_LINE_BREAK_CHARACTERS FORMAT_FORMFEED ACCUMULATOR
+          CHILD_ERROR CHILD_ERROR_NATIVE ENCODING OS_ERROR ERRNO
+          EXTENDED_OS_ERROR EVAL_ERROR PROCESS_ID PID REAL_USER_ID UID
+          EFFECTIVE_USER_ID EUID REAL_GROUP_ID GID EFFECTIVE_GROUP_ID EGID
+          PROGRAM_NAME COMPILING DEBUGGING RE_DEBUG_FLAGS RE_TRIE_MAXBUF
+          SYSTEM_FD_MAX INPLACE_EDIT OSNAME OPEN PERLDB
+          LAST_REGEXP_CODE_RESULT EXCEPTIONS_BEING_CAUGHT BASETIME TAINT
+          UNICODE UTF8CACHE UTF8LOCALE PERL_VERSION WARNING WARNING_BITS
+          WIN32_SLOPPY_STAT EXECUTABLE_NAME ARGVOUT INC SIG __DIE__ __WARN__
+          $& $` $' $+ $^N @+ %+ $. $/ $| $\ $" $; $% $= $- @- %- $~ $^ $:
+          $? $! %! $@ $$ $< $> $[ $] $^A $^C $^D $^E $^F $^H $^I $^L
+          $^M $^O $^P $^R $^S $^T $^V $^W $^X %^H @F @_
+          ), '$,', '$(', '$)',
     ],
     perlrun => [
         qw(HOME LOGDIR PATH PERL5LIB PERL5OPT PERLIO PERLIO_DEBUG PERLLIB
@@ -59,10 +65,10 @@ our %found_in = (
     # commonly used modules, like:
     Moose => [
         qw(has before after around super override inner augment confessed
-           extends with)
+          extends with)
     ],
-    Error      => [qw(try catch except otherwise finally record)],
-    SelfLoader => [qw(__DATA__ __END__ DATA)],
+    Error        => [qw(try catch except otherwise finally record)],
+    SelfLoader   => [qw(__DATA__ __END__ DATA)],
     Storable     => [qw(freeze thaw)],
     Carp         => [qw(carp cluck croak confess shortmess longmess)],
     'Test::More' => [
@@ -87,16 +93,14 @@ our %found_in = (
           mkdtemp mktemp unlink0 safe_level)
     ],
     'File::Copy' => [qw(copy move cp mv rmscopy)],
-    'PerlIO'     => [
-        qw(:bytes :crlf :mmap :perlio :pop :raw :stdio :unix :utf8 :win32)
-    ],
+    'PerlIO' =>
+      [qw(:bytes :crlf :mmap :perlio :pop :raw :stdio :unix :utf8 :win32)],
 );
 
 sub run {
     our %opt = ('perldoc-command' => 'perldoc');
     GetOptions(\%opt, 'perldoc-command:s', 'debug') or pod2usage(2);
     my $word = shift @ARGV;
-
     while (my ($file, $words) = each our %found_in) {
         $_ eq $word && execute($opt{'perldoc-command'} => $file) for @$words;
     }
@@ -154,6 +158,7 @@ C<perlzonji> is like C<perldoc> except it knows about more things. Try these:
     perlzonji AUTOLOAD
     perlzonji TIEARRAY
     perlzonji INPUT_RECORD_SEPARATOR
+    perlzonji '$^F'
     perlzonji PERL5OPT
     perlzonji :mmap
     perlzonji __WARN__
