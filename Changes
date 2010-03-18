@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.100770  2010-03-18 21:52:17 Europe/Vienna
     - removed weaver.ini since that's handled in Dist::Zilla's [@MARCEL] now
     - exposed %found_in as a package global
     - removed Class::MethodMaker definitions
