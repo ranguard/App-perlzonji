@@ -4,7 +4,7 @@ use warnings;
 
 package App::perlzonji::Plugin::Label;
 
-# ABSTRACT: perlzonji plugin for labels
+# ABSTRACT: Plugin for labels
 use App::perlzonji;
 App::perlzonji->add_trigger(
     'matches.add' => sub {

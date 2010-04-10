@@ -4,7 +4,7 @@ use warnings;
 
 package App::perlzonji::Plugin::SpecialPackages;
 
-# ABSTRACT: perlzonji plugin to find documentation for special Perl packages
+# ABSTRACT: Plugin to find documentation for special Perl packages
 use App::perlzonji;
 App::perlzonji->add_trigger(
     'matches.add' => sub {

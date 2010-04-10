@@ -4,7 +4,7 @@ use warnings;
 
 package App::perlzonji::Plugin::FoundIn;
 
-# ABSTRACT: perlzonji plugin to find documentation for syntax and concepts
+# ABSTRACT: Plugin to find documentation for syntax and concepts
 use App::perlzonji;
 
 # Specify like this because it's easier. We compute the reverse later (i.e.,

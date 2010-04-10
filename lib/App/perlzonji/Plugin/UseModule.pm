@@ -4,7 +4,7 @@ use warnings;
 
 package App::perlzonji::Plugin::UseModule;
 
-# ABSTRACT: perlzonji plugin to try the search word as a module name
+# ABSTRACT: Plugin to try the search word as a module name
 use App::perlzonji;
 App::perlzonji->add_trigger(
     'matches.add' => sub {
