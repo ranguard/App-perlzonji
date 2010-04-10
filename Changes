@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.101000  2010-04-10 17:23:20 Europe/Vienna
     - added many variables from perlvar
     - made the application pluggable with Module::Pluggable and Class::Trigger
 
