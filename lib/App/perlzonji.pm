@@ -4,7 +4,7 @@ use warnings;
 
 package App::perlzonji;
 
-# ABSTRACT: a more knowledgeable perldoc
+# ABSTRACT: A more knowledgeable perldoc
 use Pod::Usage::CommandLine qw(GetOptions pod2usage);
 use Class::Trigger;
 use Module::Pluggable require => 1;
