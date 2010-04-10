@@ -2,6 +2,7 @@ Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
     - added many variables from perlvar
+    - made the application pluggable with Module::Pluggable and Class::Trigger
 
 1.100770  2010-03-18 21:52:17 Europe/Vienna
     - removed weaver.ini since that's handled in Dist::Zilla's [@MARCEL] now
