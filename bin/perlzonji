@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-# ABSTRACT: a more knowledgeable perldoc
+# ABSTRACT: A more knowledgeable perldoc
 use warnings;
 use strict;
 use App::perlzonji;

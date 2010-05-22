@@ -5,14 +5,28 @@ use warnings;
 package App::perlzonji;
 
 # ABSTRACT: A more knowledgeable perldoc
-use Pod::Usage::CommandLine qw(GetOptions pod2usage);
+use Getopt::Long;
+use Pod::Usage;
 use Class::Trigger;
 use Module::Pluggable require => 1;
 __PACKAGE__->plugins;  # 'require' them
 
 sub run {
     our %opt = ('perldoc-command' => 'perldoc');
-    GetOptions(\%opt, 'perldoc-command:s', 'debug') or pod2usage(2);
+    GetOptions(\%opt, qw(help|h|? man|m perldoc-command:s debug)) or pod2usage(2);
+    if ($opt{help}) {
+        pod2usage(
+            -exitstatus => 0,
+            -input      => __FILE__,
+        );
+    }
+    if ($opt{man}) {
+        pod2usage(
+            -exitstatus => 0,
+            -input      => __FILE__,
+            -verbose    => 2
+        );
+    }
     my $word = shift @ARGV;
 
     my @matches;

@@ -1,6 +1,7 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+    - make --man and --help work again now that the docs are in the module
 
 1.101000  2010-04-10 17:23:20 Europe/Vienna
     - added many variables from perlvar
