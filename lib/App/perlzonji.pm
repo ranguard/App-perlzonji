@@ -9,11 +9,12 @@ use Getopt::Long;
 use Pod::Usage;
 use Class::Trigger;
 use Module::Pluggable require => 1;
-__PACKAGE__->plugins;  # 'require' them
+__PACKAGE__->plugins;    # 'require' them
 
 sub run {
     our %opt = ('perldoc-command' => 'perldoc');
-    GetOptions(\%opt, qw(help|h|? man|m perldoc-command:s debug)) or pod2usage(2);
+    GetOptions(\%opt, qw(help|h|? man|m perldoc-command:s debug))
+      or pod2usage(2);
     if ($opt{help}) {
         pod2usage(
             -exitstatus => 0,
@@ -28,12 +29,12 @@ sub run {
         );
     }
     my $word = shift @ARGV;
-
     my @matches;
     __PACKAGE__->call_trigger('matches.add', $word, \@matches);
     if (@matches) {
         if (@matches > 1) {
-            warn sprintf "%s matches for [%s], using first (%s):\n", scalar(@matches), $word, $matches[0];
+            warn sprintf "%s matches for [%s], using first (%s):\n",
+              scalar(@matches), $word, $matches[0];
             warn "    $_\n" for @matches;
         }
         execute($opt{'perldoc-command'}, $matches[0]);
@@ -49,7 +50,6 @@ sub execute {
     print "@_\n" if $opt{debug};
     exec @_;
 }
-
 1;
 
 =begin :prelude

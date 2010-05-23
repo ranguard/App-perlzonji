@@ -4,4 +4,3 @@ use warnings;
 use strict;
 use App::perlzonji;
 App::perlzonji->run;
-
