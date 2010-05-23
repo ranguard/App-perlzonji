@@ -13,7 +13,7 @@ __PACKAGE__->plugins;    # 'require' them
 
 sub run {
     our %opt = ('perldoc-command' => 'perldoc');
-    GetOptions(\%opt, qw(help|h|? man|m perldoc-command:s debug))
+    GetOptions(\%opt, qw(help|h|? man|m perldoc-command|c:s debug dry-run|n))
       or pod2usage(2);
     if ($opt{help}) {
         pod2usage(
@@ -41,14 +41,22 @@ sub run {
     }
 
     # fallback
-    warn "assuming that [$word] is a built-in function\n";
+    warn "assuming that [$word] is a built-in function\n" if $opt{debug};
     execute($opt{'perldoc-command'}, qw(-f), $word);
 }
 
 sub execute {
     our %opt;
-    print "@_\n" if $opt{debug};
-    exec @_;
+    if ($opt{'dry-run'}) {
+
+        # under --dry-run, don't pretend to execute more than once
+        our $executed;
+        return if $executed++;
+        warn "@_\n";
+    } else {
+        warn "@_\n" if $opt{debug};
+        exec @_;
+    }
 }
 1;
 
@@ -92,7 +100,7 @@ Options can be shortened according to L<Getopt::Long/"Case and abbreviations">.
 
 =over
 
-=item C<--perldoc-command>
+=item C<--perldoc-command>, C<-c>
 
 Specifies the POD formatter/pager to delegate to. Default is C<perldoc>.
 C<annopod> from L<AnnoCPAN::Perldoc> is a better alternative.
@@ -101,11 +109,15 @@ C<annopod> from L<AnnoCPAN::Perldoc> is a better alternative.
 
 Prints the whole command before executing it.
 
-=item C<--help>
+=item C<--dry-run>, C<-n>
+
+Just print the command that would be executed; don't actually execute it.
+
+=item C<--help>, C<-h>, C<-?>
 
 Prints a brief help message and exits.
 
-=item C<--man>
+=item C<--man>, C<-m>
 
 Prints the manual page and exits.
 
