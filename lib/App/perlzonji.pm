@@ -29,20 +29,26 @@ sub run {
         );
     }
     my $word = shift @ARGV;
-    my @matches;
-    __PACKAGE__->call_trigger('matches.add', $word, \@matches);
-    if (@matches) {
-        if (@matches > 1) {
+	my $matches = find_matches($word);
+    if (@$matches) {
+        if (@$matches > 1) {
             warn sprintf "%s matches for [%s], using first (%s):\n",
-              scalar(@matches), $word, $matches[0];
-            warn "    $_\n" for @matches;
+              scalar(@$matches), $word, $matches->[0];
+            warn "    $_\n" for @$matches;
         }
-        execute($opt{'perldoc-command'}, $matches[0]);
+        execute($opt{'perldoc-command'}, $matches->[0]);
     }
 
     # fallback
     warn "assuming that [$word] is a built-in function\n" if $opt{debug};
     execute($opt{'perldoc-command'}, qw(-f), $word);
+}
+
+sub find_matches {
+	my $word = shift;
+    my @matches;
+    __PACKAGE__->call_trigger('matches.add', $word, \@matches);
+	return \@matches;
 }
 
 sub execute {
