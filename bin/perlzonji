@@ -1,5 +1,6 @@
 #!/usr/bin/env perl
 # ABSTRACT: A more knowledgeable perldoc
+# PODNAME: perlzonji
 use warnings;
 use strict;
 use App::perlzonji;

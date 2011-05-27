@@ -3,7 +3,6 @@ use warnings;
 use strict;
 use Test::More;
 use App::perlzonji;
-
 my %expect = (
     'xor'                    => 'perlop',
     'foreach'                => 'perlsyn',
@@ -25,8 +24,7 @@ done_testing;
 
 sub test_find_matches {
     my ($args, $expect, $name) = @_;
-	
-	my $found = App::perlzonji::find_matches($args);
-	is($expect, $found->[0], "find_matches() - $args ok");
-	fail("Too many results") if scalar(@$found) != 1;
+    my $found = App::perlzonji::find_matches($args);
+    is($expect, $found->[0], "find_matches() - $args ok");
+    fail("Too many results") if scalar(@$found) != 1;
 }

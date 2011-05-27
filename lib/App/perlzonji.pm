@@ -28,8 +28,8 @@ sub run {
             -verbose    => 2
         );
     }
-    my $word = shift @ARGV;
-	my $matches = find_matches($word);
+    my $word    = shift @ARGV;
+    my $matches = find_matches($word);
     if (@$matches) {
         if (@$matches > 1) {
             warn sprintf "%s matches for [%s], using first (%s):\n",
@@ -45,10 +45,10 @@ sub run {
 }
 
 sub find_matches {
-	my $word = shift;
+    my $word = shift;
     my @matches;
     __PACKAGE__->call_trigger('matches.add', $word, \@matches);
-	return \@matches;
+    return \@matches;
 }
 
 sub execute {
@@ -96,20 +96,22 @@ C<perlzonji> is like C<perldoc> except it knows about more things. Try these:
 
 For efficiency, C<alias pod=perlzonji>.
 
-The word C<zonji> means "knowledge of" in Japanese. Another example is the
-question "gozonji desu ka", meaning "Do you know?" - "go" is a prefix added
-for politeness.
+The word C<zonji> means "knowledge of" in Japanese. Another example
+is the question "gozonji desu ka", meaning "Do you know?" - "go" is a
+prefix added for politeness.
 
 =head1 OPTIONS
 
-Options can be shortened according to L<Getopt::Long/"Case and abbreviations">.
+Options can be shortened according to L<Getopt::Long/"Case and
+abbreviations">.
 
 =over
 
 =item C<--perldoc-command>, C<-c>
 
-Specifies the POD formatter/pager to delegate to. Default is C<perldoc>.
-C<annopod> from L<AnnoCPAN::Perldoc> is a better alternative.
+Specifies the POD formatter/pager to delegate to. Default is         .
+C<perldoc> C<annopod> from L<AnnoCPAN::Perldoc> is a better          .
+alternative                                                          .
 
 =item C<--debug>
 
@@ -117,7 +119,8 @@ Prints the whole command before executing it.
 
 =item C<--dry-run>, C<-n>
 
-Just print the command that would be executed; don't actually execute it.
+Just print the command that would be executed; don't actually execute
+it.
 
 =item C<--help>, C<-h>, C<-?>
 
@@ -135,12 +138,17 @@ The main function, which is called by the C<perlzonji> program.
 
 =function try_module
 
-Takes as argument the name of a module, tries to load that module and executes
-the formatter, giving that module as an argument. If loading the module fails,
-this subroutine does nothing.
+Takes as argument the name of a module, tries to load that module and
+executes the formatter, giving that module as an argument. If loading
+the module fails, this subroutine does nothing.
 
 =function execute
 
-Executes the given command using C<exec()>. In debug mode, it also prints the
-command before executing it.
+Executes the given command using C<exec()>. In debug mode, it also
+prints the command before executing it.
 
+=function find_matches
+
+Takes a word and returns the matches for that word. It's in a separate
+function to separate logic from presentation so other programs can use
+this module as well.
