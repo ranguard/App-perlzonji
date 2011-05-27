@@ -1,6 +1,8 @@
 Revision history for Perl extension {{$dist->name}}
 
 {{$NEXT}}
+
+1.111470  2011-05-27 18:14:50 Europe/Vienna
     - extract find_matches() so it can be accessed directly (thanks
       ranguard)
 
