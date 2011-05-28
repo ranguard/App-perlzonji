@@ -19,7 +19,8 @@ our %found_in = (
     ],
     perlsyn => [qw(if else elsif unless while until for foreach)],
     perlobj => [qw(isa ISA can VERSION)],
-    perlsub => [qw(AUTOLOAD BEGIN CHECK INIT END DESTROY)],
+    perlsub => [qw(AUTOLOAD DESTROY)],
+    perlmod => [qw(BEGIN UNITCHECK CHECK INIT END)],
     perltie => [
         qw(TIESCALAR TIEARRAY TIEHASH TIEHANDLE FETCH STORE UNTIE
           FETCHSIZE STORESIZE POP PUSH SHIFT UNSHIFT SPLICE DELETE EXISTS
